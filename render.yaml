@@ -1,7 +1,7 @@
 databases:
   - name: adventure-db
     plan: free
-    databaseName: adventure-log
+    databaseName: adventure
     user: namit
 
 services:
