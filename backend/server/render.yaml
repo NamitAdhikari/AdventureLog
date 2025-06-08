@@ -1,0 +1,20 @@
+databases:
+  - name: adventure-db
+    plan: free
+    databaseName: adventure-log
+    user: namit
+
+services:
+  - type: web
+    plan: free
+    name: adventure-web
+    runtime: python
+    buildCommand: './build_files.sh'
+    startCommand: 'python -m gunicorn main.wsgi:application'
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mysitedb
+          property: connectionString
+      - key: WEB_CONCURRENCY
+        value: 4
