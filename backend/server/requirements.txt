@@ -22,3 +22,9 @@ ijson==3.3.0
 tqdm==4.67.1
 overpy==0.7
 publicsuffix2==2.20191221
+dj-database-url==3.0.0
+brotli==1.1.0
+click==8.2.1
+h11==0.16.0
+uvicorn==0.34.3
+gdal==3.11.0
