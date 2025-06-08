@@ -1,0 +1,39 @@
+databases:
+  - name: adventure-db
+    plan: free
+    databaseName: adventure
+    user: namit
+
+services:
+  - type: web
+    plan: free
+    name: AdventureLog
+    runtime: python
+    repo: https://github.com/NamitAdhikari/AdventureLog
+    buildCommand: "./build_files.sh"
+    startCommand: "python -m gunicorn main.wsgi:application"
+    autoDeployTrigger: commit
+    rootDir: backend/server
+    region: oregon
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mysitedb
+          property: connectionString
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: SECRET_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: PUBLIC_URL
+        sync: false
+      - key: DJANGO_ADMIN_EMAIL
+        sync: false
+      - key: DJANGO_ADMIN_PASSWORD
+        sync: false
+      - key: DJANGO_ADMIN_USERNAME
+        sync: false
+version: "1"
