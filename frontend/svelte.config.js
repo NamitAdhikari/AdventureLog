@@ -1,10 +1,15 @@
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
+import adapterNetlify from '@sveltejs/adapter-netlify';
 import adapterNode from '@sveltejs/adapter-node';
 import adapterVercel from '@sveltejs/adapter-vercel';
 
 let adapter;
-if (process.env.VERCEL) {
+
+if (process.env.NETLIFY) {
+	adapter = adapterNetlify;
+}
+else if (process.env.VERCEL) {
 	adapter = adapterVercel;
 } else {
 	adapter = adapterNode;
