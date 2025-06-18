@@ -174,7 +174,7 @@ STATIC_URL = "/static/"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"  # This path must match the NGINX root
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "staticfiles"]
 
 STORAGES = {
     "staticfiles": {
@@ -240,7 +240,6 @@ AUTHENTICATION_BACKENDS = [
     "users.backends.NoPasswordAuthBackend",
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "username"
