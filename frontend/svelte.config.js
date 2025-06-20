@@ -3,14 +3,16 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import adapterNetlify from '@sveltejs/adapter-netlify';
 import adapterNode from '@sveltejs/adapter-node';
 import adapterVercel from '@sveltejs/adapter-vercel';
+import adapterCloudflare from '@sveltejs/adapter-cloudflare';
 
 let adapter;
 
 if (process.env.NETLIFY) {
 	adapter = adapterNetlify;
-}
-else if (process.env.VERCEL) {
+} else if (process.env.VERCEL) {
 	adapter = adapterVercel;
+} else if (process.env.CLOUDFLARE) {
+	adapter = adapterCloudflare;
 } else {
 	adapter = adapterNode;
 }
