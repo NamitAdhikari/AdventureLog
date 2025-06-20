@@ -11,3 +11,6 @@ enabled = true
 [assets]
 directory = ".svelte-kit/output/client"
 binding = "ASSETS"
+
+[site]
+bucket = ".svelte-kit/output/client"
