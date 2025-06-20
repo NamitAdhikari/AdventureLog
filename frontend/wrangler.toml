@@ -1,0 +1,8 @@
+name = "adventure-log"
+compatibility_date = "2025-06-20"
+
+main = ".svelte-kit/cloudflare/_worker.js"
+
+# If you're using environment variables/secrets:
+usage_model = "bundled"
+node_compat = true
