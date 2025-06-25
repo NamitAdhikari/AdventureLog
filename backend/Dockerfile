@@ -12,15 +12,17 @@ WORKDIR /code
 
 # Install system dependencies (Nginx included)
 RUN apt-get update \
-    && apt-get install -y git postgresql-client gdal-bin libgdal-dev nginx supervisor \
+    && apt-get install -y git postgresql-client gdal-bin libgdal-dev nginx supervisor curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install Python dependencies
 COPY ./server/requirements.txt /code/
 RUN gdal-config --version
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN uv pip install -r requirements.txt
 
 # Create necessary directories
 RUN mkdir -p /code/static /code/media
