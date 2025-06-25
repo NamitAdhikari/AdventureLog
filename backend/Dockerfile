@@ -4,25 +4,23 @@ FROM python:3.10-slim
 LABEL Developers="Sean Morley"
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set the working directory
 WORKDIR /code
 
 # Install system dependencies (Nginx included)
 RUN apt-get update \
-    && apt-get install -y git postgresql-client gdal-bin libgdal-dev nginx supervisor curl \
+    && apt-get install -y git postgresql-client gdal-bin libgdal-dev \
+    g++ build-essential nginx supervisor wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-# Install uv
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install Python dependencies
 COPY ./server/requirements.txt /code/
 RUN gdal-config --version
-RUN uv pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Create necessary directories
 RUN mkdir -p /code/static /code/media
