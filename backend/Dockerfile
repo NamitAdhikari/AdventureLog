@@ -18,6 +18,7 @@ RUN apt-get update \
 
 # Install Python dependencies
 COPY ./server/requirements.txt /code/
+RUN gdal-config --version
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
 
